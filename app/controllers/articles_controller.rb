@@ -12,7 +12,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(title: "", body: "")
+    @article = Article.new(article_params)
     
     # redirect_to will cause the browser to make an ew req
     # whereas render renders the specified view for the current request
@@ -25,4 +25,9 @@ class ArticlesController < ApplicationController
       render :new, status: :unprocessable_entry
     end
   end
+
+  private
+    def article_params
+      params.require(:article).permit(:title, :body)
+    end
 end
