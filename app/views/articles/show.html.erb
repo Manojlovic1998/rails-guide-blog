@@ -1,8 +1,20 @@
 <h1><%= @article.title %></h1>
 <p><%= @article.body %></p>
-
 <ul>
-    <li>
-        <%= link_to "Edit", edit_article_path(@article)%>
-    </li>
+  <li>
+    <%= link_to "Edit", edit_article_path(@article)%>
+  </li>
+  <li>
+    <%= link_to "Destroy", article_path(@article), data: {
+                    turbo_method: :delete, 
+                    turbo_confirm: "Are you sure?"} %>
+  </li>
 </ul>
+<%# The data-turbo-method and data-turbo-confirm HTML attr
+of the Destroy link are both attrs that hook into Turbo which
+is included by default in fresh Rails applications. %>
+<%# data-turbo-method="delete" will cause the link to make
+DELETE request instead of a GET request.%>
+<%# data-turbo-confirm="Are you sure?" will cause a confirmation dialog
+to appear when the link is clicked. If the user cancels the dialog, the
+request will be aborted. %>
